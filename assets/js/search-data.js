@@ -39,10 +39,10 @@ ninja.data = [{
           },
         },{id: "nav-curriculum",
           title: "Curriculum 📄",
-          description: "You can download my [CV in PDF](assets/pdf/Curriculum_.pdf).",
+          description: "You can download my CV in PDF :)",
           section: "Navigation",
           handler: () => {
-            window.location.href = "/cv/";
+            window.location.href = "/_pages/cv/";
           },
         },{id: "nav-teaching",
           title: "teaching",
