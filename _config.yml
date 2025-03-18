@@ -270,7 +270,7 @@ scholar:
   locale: en
 
   source: /_bibliography/
-  bibliography: rafanelli.bib
+  bibliography: papers.bib
   bibliography_template: bib
   bibtex_filters: [latex, smallcaps, superscript]
 
