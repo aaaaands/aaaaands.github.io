@@ -4,34 +4,27 @@
   {% if site.enable_publication_thumbnails %}
     <div class="col col-sm-2 abbr">
       {%- if entry.abbr -%}
-        {% assign venue_style = null %}
-
-        {%- comment -%}
-        Set the background color based on the abbreviation directly here
-        {%- endcomment -%}
-        {% case entry.abbr %}
-          {% when 'J' %}
-            {% assign venue_style = 'style="background-color:#FF5733;"' %} <!-- Journal color -->
-          {% when 'C' %}
-            {% assign venue_style = 'style="background-color:#33FF57;"' %} <!-- Conference color -->
-          {% when 'W' %}
-            {% assign venue_style = 'style="background-color:#3357FF;"' %} <!-- Workshop color -->
-          {% else %}
-            {% assign venue_style = 'style="background-color:#D3D3D3;"' %} <!-- Default color if abbreviation is not matched -->
-        {% endcase %}
-
-        <abbr
-          class="badge rounded w-100"
-          {% if venue_style %}
-            {{ venue_style }}  <!-- Apply the inline style for background color -->
-          {% endif -%}
-        >
-          {% if entry.abbr %}
-            <div>{{- entry.abbr -}}</div>
-          {% endif %}
-        </abbr>
+        {%- if site.data.venues[entry.abbr] -%}
+          {% assign venue_style = null %}
+          {% if site.data.venues[entry.abbr].color != blank %}
+            {% assign venue_style = site.data.venues[entry.abbr].color | prepend: 'style="background-color:' | append: '"' %}
+          {%- endif -%}
+          <abbr
+            class="badge rounded w-100"
+            {% if venue_style %}
+              {{ venue_style }}
+            {% endif -%}
+          >
+            {% if site.data.venues[entry.abbr].url %}
+              <a href="{{ site.data.venues[entry.abbr].url }}">{{ entry.abbr }}</a>
+            {% else %}
+              <div>{{- entry.abbr -}}</div>
+            {% endif %}
+          </abbr>
+        {% else %}
+          <abbr class="badge rounded w-100">{{ entry.abbr }}</abbr>
+        {% endif %}
       {% endif %}
-      
       {% if entry.preview %}
         {% if entry.preview contains '://' %}
           <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
@@ -51,8 +44,6 @@
       {% endif %}
     </div>
   {% endif %}
-</div>
-
 
   <!-- Entry bib key -->
   <div id="{{ entry.key }}" class="{% if site.enable_publication_thumbnails %}col-sm-8{% else %}col-sm-10{% endif %}">
