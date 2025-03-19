@@ -2,7 +2,7 @@
 layout: about
 title: About 🍃
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: A journey of a thousand miles begins with a single step.
 
 profile:
   align: right
